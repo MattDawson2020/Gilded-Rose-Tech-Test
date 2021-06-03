@@ -62,7 +62,7 @@ class GildedRose
       elsif item.name == "Sulfuras, Hand of Ragnaros"
         #logic
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
-        #logic
+        item.quality = 0
       elsif item.name == "Conjured"
         #logic
       else
@@ -79,6 +79,7 @@ class GildedRose
   def increase_quality(item)
     fail "Cannot exceed maximum quality" if item.quality >= 50
     item.quality += 1
+    item.sell_in -= 1
   end
 
 
