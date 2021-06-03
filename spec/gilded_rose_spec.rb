@@ -25,6 +25,13 @@ describe GildedRose do
       expect(items.first.quality).to eq 8
     end
 
+    it 'lets reduces regular items sell_in' do
+      items = [Item.new('foo', 10, 10)]
+      GildedRose.new(items).update_quality
+
+      expect(items.first.sell_in).to eq 9
+    end
+
   end
 
   context 'Aged Brie' do
