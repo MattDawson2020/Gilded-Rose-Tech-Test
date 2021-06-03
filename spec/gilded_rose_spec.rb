@@ -123,10 +123,15 @@ describe GildedRose do
     end
 
     it 'Reduces conjured items sell_in' do
-      items = [Item.new('Conjured', 20, 20)]
       conjured = GildedRose.new(conjured_item).update_quality
 
       expect(conjured.first.sell_in).to eq 19
+    end
+
+    it 'Conjured items cannot go below minimum' do
+      conjured = GildedRose.new(conjured_item)
+
+      expect { 15.times {conjured.update_quality } }.to raise_error 'Item below minimum quality'
     end
   end
 

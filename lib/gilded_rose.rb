@@ -9,17 +9,18 @@ class GildedRose
 
   def update_quality
     @items.each do |item|
-      check_range(item) unless item.name == "Sulfuras, Hand of Ragnaros"
-      if item.name == "Aged Brie"
-        update_brie(item)
-      elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
-        update_pass(item)
-      elsif item.name == 'Sulfuras, Hand of Ragnaros'
-        next
-      elsif item.name == "Conjured"
-        2.times { update_regular(item) }
-      else
-        update_regular(item)
+      check_range(item) unless item.name == 'Sulfuras, Hand of Ragnaros'
+      case item.name
+        when 'Aged Brie'
+          update_brie(item)
+        when 'Backstage passes to a TAFKAL80ETC concert'
+          update_pass(item)
+        when 'Sulfuras, Hand of Ragnaros'
+          next
+        when 'Conjured'
+          2.times { update_regular(item) }
+        else
+          update_regular(item)
       end
       item.sell_in -= 1 
     end
