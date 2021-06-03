@@ -6,10 +6,10 @@ class GildedRose
     @items = items
   end
 
-  def new_update
+  def update_quality
     @items.each do |item|
       if item.name == "Aged Brie"
-        #logic
+        item.quality += 1
       elsif item.name == "Sulfuras, Hand of Ragnaros"
         #logic
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
@@ -22,7 +22,7 @@ class GildedRose
     end
   end
 
-  def update_quality()
+  def old_update()
     @items.each do |item|
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > 0
