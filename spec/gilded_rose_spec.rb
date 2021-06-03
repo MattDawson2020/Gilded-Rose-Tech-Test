@@ -105,4 +105,20 @@ describe GildedRose do
     end
   end
 
+  context 'Sulfuras' do
+    it 'Sulfuras does not degrade quality' do
+      items = [Item.new('Sulfuras, Hand of Ragnaros', 10, 50)]
+      GildedRose.new(items).update_quality
+
+      expect(items.first.quality).to eq 50
+    end
+
+    it 'Sulfuras does not degrade sell_in' do
+      items = [Item.new('Sulfuras, Hand of Ragnaros', 10, 50)]
+      GildedRose.new(items).update_quality
+
+      expect(items.first.sell_in).to eq 10
+    end
+  end
+
 end

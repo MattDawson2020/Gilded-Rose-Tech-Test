@@ -59,19 +59,16 @@ class GildedRose
     @items.each do |item|
       if item.name == "Aged Brie"
         increase_quality(item)
-        item.sell_in -= 1
-      elsif item.name == "Sulfuras, Hand of Ragnaros"
-        #logic
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         update_pass(item)
-        item.sell_in -= 1
+      elsif item.name == 'Sulfuras, Hand of Ragnaros'
+        next
       elsif item.name == "Conjured"
         2.times { update_regular(item) }
-        item.sell_in -= 1
       else
         update_regular(item)
-        item.sell_in -= 1
       end
+      item.sell_in -= 1 
     end
   end
 
