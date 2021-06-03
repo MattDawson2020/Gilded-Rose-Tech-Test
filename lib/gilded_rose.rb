@@ -11,7 +11,7 @@ class GildedRose
     @items.each do |item|
       check_range(item) unless item.name == "Sulfuras, Hand of Ragnaros"
       if item.name == "Aged Brie"
-        increase_quality(item)
+        update_brie(item)
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         update_pass(item)
       elsif item.name == 'Sulfuras, Hand of Ragnaros'
@@ -27,7 +27,7 @@ class GildedRose
 
   private 
 
-  def increase_quality(item)
+  def update_brie(item)
     item.quality += 1
   end
 

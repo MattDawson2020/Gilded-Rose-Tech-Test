@@ -36,9 +36,20 @@ describe GildedRose do
     end
 
     it 'Cannot go below 0 item quality' do
-      items = [Item.new('foo', 10, 0)]
-      
-      expect { GildedRose.new(items).update_quality }.to raise_error 'Item below minimum quality'
+      item = GildedRose.new(regular_item)
+
+      expect { 30.times {item.update_quality } }.to raise_error 'Item below minimum quality'
+    end
+
+    it 'Calculates correctly on repeat updates' do
+      repeat_item = GildedRose.new(regular_item)
+      expect(repeat_item.items.first.quality).to eq 20
+      expect(repeat_item.items.first.sell_in).to eq 20
+
+      10.times { repeat_item.update_quality }
+
+      expect(repeat_item.items.first.quality).to eq 10
+      expect(repeat_item.items.first.sell_in).to eq 10
     end
 
   end
@@ -54,6 +65,12 @@ describe GildedRose do
     it 'Reduces the sell_in of Aged Brie' do
       brie = GildedRose.new(aged_brie).update_quality
       expect(brie.first.sell_in).to eq 19
+    end
+
+    it 'Brie cannot exceed maximum quality' do
+      brie = GildedRose.new(aged_brie)
+
+      expect { 31.times { brie.update_quality } }.to raise_error 'Cannot exceed maximum quality'
     end
 
   end
