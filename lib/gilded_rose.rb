@@ -67,7 +67,11 @@ class GildedRose
       elsif item.name == "Conjured"
         #logic
       else
-        #regular item logic
+        if item.sell_in <= 0
+          item.quality -= 2
+        else
+          item.quality -= 1
+        end
       end
     end
   end
