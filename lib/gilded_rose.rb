@@ -62,13 +62,7 @@ class GildedRose
       elsif item.name == "Sulfuras, Hand of Ragnaros"
         #logic
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
-        if item.sell_in <= 0
-          item.quality = 0
-        elsif item.sell_in <= 5
-          item.quality += 3
-        elsif item.sell_in.between?(5,10)
-          item.quality += 2
-        end
+        update_pass(item)
         item.sell_in -= 1
       elsif item.name == "Conjured"
         #logic
@@ -89,6 +83,15 @@ class GildedRose
     item.sell_in -= 1
   end
 
+  def update_pass(item)
+    if item.sell_in <= 0
+      item.quality = 0
+    elsif item.sell_in <= 5
+      item.quality += 3
+    elsif item.sell_in.between?(5,10)
+      item.quality += 2
+    end
+  end
 
 end
 
