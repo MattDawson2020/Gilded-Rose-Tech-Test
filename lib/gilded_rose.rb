@@ -59,14 +59,18 @@ class GildedRose
     @items.each do |item|
       if item.name == "Aged Brie"
         increase_quality(item)
+        item.sell_in -= 1
       elsif item.name == "Sulfuras, Hand of Ragnaros"
         #logic
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         update_pass(item)
+        item.sell_in -= 1
       elsif item.name == "Conjured"
-        #logic
+        2.times { update_regular(item) }
+        item.sell_in -= 1
       else
         update_regular(item)
+        item.sell_in -= 1
       end
     end
   end
@@ -79,7 +83,6 @@ class GildedRose
   def increase_quality(item)
     fail "Cannot exceed maximum quality" if item.quality >= 50
     item.quality += 1
-    item.sell_in -= 1
   end
 
   def update_pass(item)
@@ -90,7 +93,6 @@ class GildedRose
     elsif item.sell_in.between?(5,10)
       item.quality += 2
     end
-    item.sell_in -= 1
   end
 
   def update_regular(item)
@@ -99,7 +101,6 @@ class GildedRose
     else
       item.quality -= 1
     end
-    item.sell_in -= 1
   end
 
 end
