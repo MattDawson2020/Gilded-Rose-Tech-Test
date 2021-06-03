@@ -39,6 +39,8 @@ class GildedRose
       item.quality += 3
     elsif item.sell_in.between?(5,10)
       item.quality += 2
+    else
+      item.quality += 1
     end
   end
 
