@@ -9,6 +9,7 @@ class GildedRose
   def update_quality
     @items.each do |item|
       if item.name == "Aged Brie"
+        fail "Cannot exceed maximum quality" if item.quality >= 50
         item.quality += 1
       elsif item.name == "Sulfuras, Hand of Ragnaros"
         #logic
