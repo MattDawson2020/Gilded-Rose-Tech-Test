@@ -58,14 +58,18 @@ class GildedRose
   def update_quality
     @items.each do |item|
       if item.name == "Aged Brie"
+        check_range(item) 
         increase_quality(item)
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
+        check_range(item) 
         update_pass(item)
       elsif item.name == 'Sulfuras, Hand of Ragnaros'
         next
       elsif item.name == "Conjured"
+        check_range(item) 
         2.times { update_regular(item) }
       else
+        check_range(item) 
         update_regular(item)
       end
       item.sell_in -= 1 
@@ -78,7 +82,6 @@ class GildedRose
   private 
 
   def increase_quality(item)
-    fail "Cannot exceed maximum quality" if item.quality >= 50
     item.quality += 1
   end
 
@@ -98,6 +101,11 @@ class GildedRose
     else
       item.quality -= 1
     end
+  end
+
+  def check_range(item)
+    fail 'Cannot exceed maximum quality' if item.quality >= 50
+    fail 'Item below minimum quality' if item.quality <= 0
   end
 
 end

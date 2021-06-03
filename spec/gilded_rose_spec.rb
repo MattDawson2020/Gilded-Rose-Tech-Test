@@ -4,7 +4,7 @@ describe GildedRose do
 
   describe '#old_update' do
     it "Does not change the name" do
-      items = [Item.new('foo', 0, 0)]
+      items = [Item.new('foo', 20, 20)]
       GildedRose.new(items).old_update()
       expect(items[0].name).to eq 'foo'
     end
@@ -12,45 +12,51 @@ describe GildedRose do
 
   context '#update_quality' do
     it 'Lets regular items above sell_in degrade normally' do
-      items = [Item.new('foo', 10, 10)]
+      items = [Item.new('foo', 20, 20)]
       GildedRose.new(items).update_quality
 
-      expect(items.first.quality).to eq 9
+      expect(items.first.quality).to eq 19
+    end
+
+    it 'Reduces regular items sell_in' do
+      items = [Item.new('foo', 20, 20)]
+      GildedRose.new(items).update_quality
+
+      expect(items.first.sell_in).to eq 19
     end
 
     it 'Lets regular items below sell_in degrade faster' do
-      items = [Item.new('foo', 0, 10)]
+      items = [Item.new('foo', 0, 20)]
       GildedRose.new(items).update_quality
 
-      expect(items.first.quality).to eq 8
+      expect(items.first.quality).to eq 18
     end
 
-    it 'Lets reduces regular items sell_in' do
-      items = [Item.new('foo', 10, 10)]
-      GildedRose.new(items).update_quality
+    it 'Cannot exceed 50 item quality' do
+      items = [Item.new('foo', 10, 50)]
+      
+      expect { GildedRose.new(items).update_quality }.to raise_error 'Cannot exceed maximum quality'
+    end
 
-      expect(items.first.sell_in).to eq 9
+    it 'Cannot go below 0 item quality' do
+      items = [Item.new('foo', 10, 0)]
+      
+      expect { GildedRose.new(items).update_quality }.to raise_error 'Item below minimum quality'
     end
 
   end
 
   context 'Aged Brie' do
     it 'Increases the quality of Aged Brie' do
-      items = [Item.new("Aged Brie", 20, 0)]
+      items = [Item.new("Aged Brie", 20, 20)]
       GildedRose.new(items).update_quality
-      expect(items.first.quality).to eq 1
+      expect(items.first.quality).to eq 21
     end
 
     it 'Reduces the sell_in of Aged Brie' do
-      items = [Item.new("Aged Brie", 20, 0)]
+      items = [Item.new("Aged Brie", 20, 20)]
       GildedRose.new(items).update_quality
       expect(items.first.sell_in).to eq 19
-    end
-
-    it 'Cannot exceed 50 item quality' do
-      items = [Item.new('Aged Brie', 20, 50)]
-      
-      expect { GildedRose.new(items).update_quality }.to raise_error 'Cannot exceed maximum quality'
     end
 
   end
@@ -58,7 +64,7 @@ describe GildedRose do
   context 'Backstage passes' do
     
     it 'Can set pass quality to 0 when sell_in goes below 0' do
-      items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 0, 50)]
+      items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 0, 20)]
       GildedRose.new(items).update_quality
 
       expect(items.first.quality).to eq 0
@@ -83,7 +89,7 @@ describe GildedRose do
     end
 
     it 'Reduces the sell_in of passes' do
-      items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 20, 0)]
+      items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 20, 20)]
       GildedRose.new(items).update_quality
       expect(items.first.sell_in).to eq 19
     end
@@ -91,17 +97,17 @@ describe GildedRose do
 
   context 'Conjured items' do
     it 'Conjured items quality degrades twice as fast as regular' do
-      items = [Item.new('Conjured', 10, 10)]
+      items = [Item.new('Conjured', 20, 20)]
       GildedRose.new(items).update_quality
 
-      expect(items.first.quality).to eq 8
+      expect(items.first.quality).to eq 18
     end
 
     it 'Reduces conjured items sell_in' do
-      items = [Item.new('Conjured', 10, 10)]
+      items = [Item.new('Conjured', 20, 20)]
       GildedRose.new(items).update_quality
 
-      expect(items.first.sell_in).to eq 9
+      expect(items.first.sell_in).to eq 19
     end
   end
 
