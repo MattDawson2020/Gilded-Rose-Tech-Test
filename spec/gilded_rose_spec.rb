@@ -1,28 +1,25 @@
 require 'gilded_rose'
 
 describe GildedRose do
-
-  describe '#old_update' do
-    it "Does not change the name" do
-      items = [Item.new('foo', 20, 20)]
-      GildedRose.new(items).old_update()
-      expect(items[0].name).to eq 'foo'
-    end
-  end
-
+  
   context '#update_quality' do
-    it 'Lets regular items above sell_in degrade normally' do
-      items = [Item.new('foo', 20, 20)]
-      GildedRose.new(items).update_quality
+    let(:regular_item) { [Item.new('foo', 20, 20)] }
 
-      expect(items.first.quality).to eq 19
+    it "Does not change the name" do
+      item = GildedRose.new(regular_item).update_quality
+      expect(item.first.name).to eq 'foo'
+    end
+
+    it 'Lets regular items above sell_in degrade normally' do
+      item = GildedRose.new(regular_item).update_quality
+
+      expect(item.first.quality).to eq 19
     end
 
     it 'Reduces regular items sell_in' do
-      items = [Item.new('foo', 20, 20)]
-      GildedRose.new(items).update_quality
+      item = GildedRose.new(regular_item).update_quality
 
-      expect(items.first.sell_in).to eq 19
+      expect(item.first.sell_in).to eq 19
     end
 
     it 'Lets regular items below sell_in degrade faster' do
@@ -47,21 +44,30 @@ describe GildedRose do
   end
 
   context 'Aged Brie' do
+    let(:aged_brie) { [Item.new("Aged Brie", 20, 20)] }
+
     it 'Increases the quality of Aged Brie' do
-      items = [Item.new("Aged Brie", 20, 20)]
-      GildedRose.new(items).update_quality
-      expect(items.first.quality).to eq 21
+      brie = GildedRose.new(aged_brie).update_quality
+      expect(brie.first.quality).to eq 21
     end
 
     it 'Reduces the sell_in of Aged Brie' do
-      items = [Item.new("Aged Brie", 20, 20)]
-      GildedRose.new(items).update_quality
-      expect(items.first.sell_in).to eq 19
+      brie = GildedRose.new(aged_brie).update_quality
+      expect(brie.first.sell_in).to eq 19
     end
 
   end
 
   context 'Backstage passes' do
+    # experimented with declaring a single pass variable and running the method multiple times
+    # to simulate repeated updates, but it was ultimately much less clear than just having
+    # specific variables to each test
+
+    it 'Reduces the sell_in of passes' do
+      items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 20, 20)]
+      GildedRose.new(items).update_quality
+      expect(items.first.sell_in).to eq 19
+    end
     
     it 'Can set pass quality to 0 when sell_in goes below 0' do
       items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 0, 20)]
@@ -88,42 +94,38 @@ describe GildedRose do
       expect(items.first.quality).to eq 24
     end
 
-    it 'Reduces the sell_in of passes' do
-      items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 20, 20)]
-      GildedRose.new(items).update_quality
-      expect(items.first.sell_in).to eq 19
-    end
   end
 
   context 'Conjured items' do
-    it 'Conjured items quality degrades twice as fast as regular' do
-      items = [Item.new('Conjured', 20, 20)]
-      GildedRose.new(items).update_quality
+    let(:conjured_item) { [Item.new('Conjured', 20, 20)] }
 
-      expect(items.first.quality).to eq 18
+    it 'Conjured items quality degrades twice as fast as regular' do
+      conjured = GildedRose.new(conjured_item).update_quality
+
+      expect(conjured.first.quality).to eq 18
     end
 
     it 'Reduces conjured items sell_in' do
       items = [Item.new('Conjured', 20, 20)]
-      GildedRose.new(items).update_quality
+      conjured = GildedRose.new(conjured_item).update_quality
 
-      expect(items.first.sell_in).to eq 19
+      expect(conjured.first.sell_in).to eq 19
     end
   end
 
   context 'Sulfuras' do
-    it 'Sulfuras does not degrade quality' do
-      items = [Item.new('Sulfuras, Hand of Ragnaros', 10, 50)]
-      GildedRose.new(items).update_quality
+    let(:sulfuras) { [Item.new('Sulfuras, Hand of Ragnaros', 50, 50)]}
 
-      expect(items.first.quality).to eq 50
+    it 'Sulfuras does not degrade quality' do
+      legendary = GildedRose.new(sulfuras).update_quality
+
+      expect(legendary.first.quality).to eq 50
     end
 
     it 'Sulfuras does not degrade sell_in' do
-      items = [Item.new('Sulfuras, Hand of Ragnaros', 10, 50)]
-      GildedRose.new(items).update_quality
+      legendary = GildedRose.new(sulfuras).update_quality
 
-      expect(items.first.sell_in).to eq 10
+      expect(legendary.first.sell_in).to eq 50
     end
   end
 
