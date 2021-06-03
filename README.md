@@ -14,7 +14,9 @@
 - For final thoughts I think my main iteration method is larger than I would like, but cannot think of a simple/ cleaner way to do it than what I have now
 
 
-
+## Running the code
+Simply clone this repo to get a copy of the code, you can then use RSpec gem with keyword <rspec> in the command line to run the tests.
+Alternatively you can use a REPL like irb or pry to run the code.
 
 
 ## Kata details
