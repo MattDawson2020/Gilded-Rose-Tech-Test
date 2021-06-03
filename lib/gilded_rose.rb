@@ -6,23 +6,6 @@ class GildedRose
     @items = items
   end
 
-  def update_quality
-    @items.each do |item|
-      if item.name == "Aged Brie"
-        fail "Cannot exceed maximum quality" if item.quality >= 50
-        item.quality += 1
-      elsif item.name == "Sulfuras, Hand of Ragnaros"
-        #logic
-      elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
-        #logic
-      elsif item.name == "Conjured"
-        #logic
-      else
-        #regular item logic
-      end
-    end
-  end
-
   def old_update()
     @items.each do |item|
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
@@ -70,6 +53,34 @@ class GildedRose
       end
     end
   end
-end
 
+
+  def update_quality
+    @items.each do |item|
+      if item.name == "Aged Brie"
+        increase_quality(item)
+      elsif item.name == "Sulfuras, Hand of Ragnaros"
+        #logic
+      elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
+        #logic
+      elsif item.name == "Conjured"
+        #logic
+      else
+        #regular item logic
+      end
+    end
+  end
+
+  
+
+
+  private 
+
+  def increase_quality(item)
+    fail "Cannot exceed maximum quality" if item.quality >= 50
+    item.quality += 1
+  end
+
+
+end
 
