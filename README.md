@@ -22,6 +22,7 @@ Alternatively you can use a REPL like irb or pry to run the code.
 
 <details>
   <summary> What the coach liked </summary>
+  
   * The error handling on bad inputs 
   
   * A central loader class `app.rb` that saves me all the `irb` set up 
@@ -35,6 +36,7 @@ Alternatively you can use a REPL like irb or pry to run the code.
 
 <details>
   <summary> Improvements to be made </summary>
+  
   * No need for balance attribute on accounts as this can be calculated using the balance on transactions, avoiding duplication
  
   * Too much abstraction in having a seperate transaction history class, initially put in for SRP purposes, but is actually somewhat redundant and over-engineered
