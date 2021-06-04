@@ -22,19 +22,19 @@ Alternatively you can use a REPL like irb or pry to run the code.
 
 <details>
   <summary> What the coach liked </summary>
-  - The error handling on bad inputs 
-  - A central loader class `app.rb` that saves me all the `irb` set up 
-  - Statement class is clean and well implemented 
-  - Tests are well written and use doubles very well 
-  - The code in general is very high quality 
+  * The error handling on bad inputs 
+  * A central loader class `app.rb` that saves me all the `irb` set up 
+  * Statement class is clean and well implemented 
+  * Tests are well written and use doubles very well 
+  * The code in general is very high quality 
 </details>
 
 <details>
   <summary> Improvements to be made </summary>
-  - No need for balance attribute on accounts as this can be calculated using the balance on transactions, avoiding duplication
-  - Too much abstraction in having a seperate transaction history class, initially put in for SRP purposes, but is actually somewhat redundant and over-engineered
-  - There are three tests for different types of print statements, but this is uneccesary for requirements and these can be combined into one
-  - A few tests are redundant
+  * No need for balance attribute on accounts as this can be calculated using the balance on transactions, avoiding duplication
+  * Too much abstraction in having a seperate transaction history class, initially put in for SRP purposes, but is actually somewhat redundant and over-engineered
+  * There are three tests for different types of print statements, but this is uneccesary for requirements and these can be combined into one
+  * A few tests are redundant
 </details>
 
 
