@@ -35,6 +35,11 @@
   
 </details>
 
+## Edits
+
+- All items are now their own class that inherit from Item, this allows me to reuse the validations/ sell_in update logic, but change the update_quality logic as needed
+- Gilded rose now simply stores injected items and tells them to use their own update methods
+
 
 ## Running the code
 Simply clone this repo to get a copy of the code, you can then use RSpec gem with keyword <rspec> in the command line to run the tests.
