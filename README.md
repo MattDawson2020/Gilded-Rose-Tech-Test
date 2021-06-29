@@ -13,6 +13,28 @@
 - The end result is my code is both much easier to read than the old code, but the SRP helper methods and tests make it extremely easy to change
 - For final thoughts I think my main iteration method is larger than I would like, but cannot think of a simple/ cleaner way to do it than what I have now
 
+## Feedback and changes
+
+<details>
+  <summary> What the coach liked </summary>
+  
+  * Code is clean and easily readable compared to before
+  
+  * Tests are thorough and coverage is good
+  
+  * Everything works exactly as expected 
+  
+</details>
+
+<details>
+  <summary> Improvements to be made </summary>
+  
+  * Coach pointed out there is no reason each item cannot be a class by itself, by using inheritance we can replicate functionality and change when needed
+ 
+  * Gilded rose class is doing too many things, it should only be responsible for holding and iterating on items, rather than handling update logic
+  
+</details>
+
 
 ## Running the code
 Simply clone this repo to get a copy of the code, you can then use RSpec gem with keyword <rspec> in the command line to run the tests.
