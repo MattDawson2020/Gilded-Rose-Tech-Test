@@ -5,7 +5,7 @@ require 'gilded_rose'
 require 'item'
 require 'sulfuras'
 
-describe GildedRose do
+describe 'GildedRose class can update supplied items' do
   
   let(:subject) { GildedRose.new([
                                   AgedBrie.new("Aged Brie", 20, 20),
